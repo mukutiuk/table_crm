@@ -1,27 +1,20 @@
-export const Header = () => {
-    return (
-<header className="flex justify-between h-16 items-center">
-        <h3 className="font-inter font-semibold text-[20px] leading-[100%] tracking-[0] capitalize">
-            hi Kate!
-        </h3>
-        <div className="flex gap-4">
-          <img
-            className="w-6 h-6"
-            src="../public/Ellipse.svg"
-            alt=""
-          />
-          <img
-            className="w-6 h-6"
-            src="../public/partnerIcon.svg"
-            alt=""
-          />
-          <img className="w-6 h-6" src="../public/Union.svg" alt="" />
-          <img
-            className="w-6 h-6"
-            src="../public/Vector.svg"
-            alt=""
-          />
-        </div>
-      </header>
-    );
-};
+const icons = [
+  "Vector.svg",
+  "Union.svg",
+  "partnerIcon.svg",
+  "setting_icon.svg",
+  "Ellipse.svg",
+];
+
+export const Header = () => (
+  <header className="flex justify-between items-center h-16">
+    <h3 className="font-inter font-semibold text-2xl capitalize leading-none">
+      Hi Kate!
+    </h3>
+    <div className="flex gap-4">
+      {icons.map((icon, index) => (
+        <img key={index} className="w-6 h-6" src={`../public/${icon}`} alt="" />
+      ))}
+    </div>
+  </header>
+);

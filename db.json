@@ -185,7 +185,6 @@
     "email": "Propertymanagement@Mayfords.Com",
     "description": "Plumbing & Electrical Installations and Replacements",
     "checkbox": false
-
   },
   {
     "id": 12,
@@ -393,6 +392,23 @@
   },
   {
     "id": 24,
+    "quote": "QU-589046",
+    "date": "24/09/2024",
+    "customer": "Mayfords Estate Agents",
+    "site": "Flat 42, 25, Havana Drive, London NW11 9BB",
+    "noQuotes": 1,
+    "subTotal": "£3500.00",
+    "vat": "£700.00",
+    "total": "£4200.00",
+    "deposit": "£0.00",
+    "outstanding": "£4200.00",
+    "profit": "£3500.00",
+    "email": "Propertymanagement@Mayfords.Com",
+    "description": "Plumbing & Electrical Installations and Replacements",
+    "checkbox": false
+  },
+  {
+    "id": 25,
     "quote": "QU-589046",
     "date": "24/09/2024",
     "customer": "Mayfords Estate Agents",
