@@ -9,13 +9,16 @@ type Props = {
 
 const EditQuoteModal: React.FC<Props> = ({ data, onSave, setIsModalOpen }) => {
   const [formData, setFormData] = useState<QuoteItem>(data);
-  const [errors, setErrors] = useState<Partial<Record<keyof QuoteItem, string>>>({});
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof QuoteItem, string>>
+  >({});
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    const newValue = name === "noQuotes" || name === "id" ? Number(value) : value;
+    const newValue =
+      name === "noQuotes" || name === "id" ? Number(value) : value;
 
     setFormData((prev) => ({
       ...prev,
@@ -24,7 +27,7 @@ const EditQuoteModal: React.FC<Props> = ({ data, onSave, setIsModalOpen }) => {
 
     setErrors((prevErrors) => {
       const updatedErrors = { ...prevErrors };
-      
+
       if (value.trim() !== "") {
         delete updatedErrors[name as keyof QuoteItem];
 
@@ -49,58 +52,58 @@ const EditQuoteModal: React.FC<Props> = ({ data, onSave, setIsModalOpen }) => {
   };
 
   const handleSave = () => {
-  const newErrors: Partial<Record<keyof QuoteItem, string>> = {};
+    const newErrors: Partial<Record<keyof QuoteItem, string>> = {};
 
-  const requiredFields: (keyof QuoteItem)[] = [
-    "quote",
-    "date",
-    "customer",
-    "site",
-    "noQuotes",
-    "subTotal",
-    "vat",
-    "total",
-    "deposit",
-    "outstanding",
-    "profit",
-    "email",
-    "description",
-  ];
+    const requiredFields: (keyof QuoteItem)[] = [
+      "quote",
+      "date",
+      "customer",
+      "site",
+      "noQuotes",
+      "subTotal",
+      "vat",
+      "total",
+      "deposit",
+      "outstanding",
+      "profit",
+      "email",
+      "description",
+    ];
 
-  requiredFields.forEach((field) => {
-    const value = formData[field];
-    if (
-      value === undefined ||
-      value === null ||
-      value.toString().trim() === ""
-    ) {
-      newErrors[field] = "This field is required";
+    requiredFields.forEach((field) => {
+      const value = formData[field];
+      if (
+        value === undefined ||
+        value === null ||
+        value.toString().trim() === ""
+      ) {
+        newErrors[field] = "This field is required";
+      }
+    });
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (formData.email && !emailRegex.test(formData.email)) {
+      newErrors.email = "Invalid email address";
     }
-  });
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (formData.email && !emailRegex.test(formData.email)) {
-    newErrors.email = "Invalid email address";
-  }
+    if (isNaN(Number(formData.noQuotes))) {
+      newErrors.noQuotes = "Must be a number";
+    }
 
-  if (isNaN(Number(formData.noQuotes))) {
-    newErrors.noQuotes = "Must be a number";
-  }
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
 
-  if (Object.keys(newErrors).length > 0) {
-    setErrors(newErrors);
-    return;
-  }
+    const updatedQuote: QuoteItem = {
+      ...formData,
+      checkbox: false,
+    };
 
-  const updatedQuote: QuoteItem = {
-    ...formData,
-    checkbox: false,
+    onSave(updatedQuote);
+    setErrors({});
+    setIsModalOpen(false);
   };
-
-  onSave(updatedQuote);
-  setErrors({});
-  setIsModalOpen(false);
-};
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -111,7 +114,7 @@ const EditQuoteModal: React.FC<Props> = ({ data, onSave, setIsModalOpen }) => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {Object.entries(formData).map(([key, value]) =>
-            key !== "id" &&  key !== "checkbox" ? (
+            key !== "id" && key !== "checkbox" ? (
               <div key={key}>
                 <label className="block text-sm font-medium capitalize mb-1">
                   {key}

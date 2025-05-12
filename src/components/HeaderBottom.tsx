@@ -1,119 +1,32 @@
 export const HeaderBottom = () => {
   return (
-    <div className="flex mb-6">
-      <div className="w-[217px] h-[54px] pt-3 pb-[12px] flex justify-center gap-[12px] flex-col items-center">
-        <img
-          className="w-6 h-6"
-          src="../public/hav/mingcute_horn-line.svg"
-          alt=""
-        />
-        <div className="flex items-center justify-center">
-          <span className="font-inter font-normal text-[14px] leading-[100%] tracking-[0] capitalize">
-            Leads
-          </span>
-          <img src="../public/weui_arrow-outlined.svg" alt="" />
+    <div className="flex max-lg:flex-wrap justify-center md:justify-start mb-6">
+      {[
+        { label: "Leads", icon: "hav/mingcute_horn-line.svg" },
+        { label: "Quotes", icon: "hav/documentIcon.svg", bg: "bg-[#B5B8FF]" },
+        { label: "Jobs", icon: "hav/toolsIcon.svg" },
+        { label: "Planner", icon: "hav/planer.svg" },
+        { label: "Chat", icon: "Vector.svg" },
+        { label: "Finance", icon: "hav/Group.svg" },
+        { label: "Contacts", icon: "hav/contactIcon.svg" },
+        { label: "Expenses", icon: "hav/moneyIcon.svg" },
+        { label: "User", icon: "hav/lucide_user-round.svg" },
+      ].map(({ label, icon, bg }, i) => (
+        <div
+          key={i}
+          className={`w-[217px] h-[54px] pt-3 pb-3 flex justify-center gap-3 flex-col items-center rounded ${
+            bg || ""
+          }`}
+        >
+          <img className="w-6 h-6" src={`../public/${icon}`} alt="" />
+          <div className="flex items-center justify-center">
+            <span className="font-inter font-normal text-[14px] leading-[100%] capitalize">
+              {label}
+            </span>
+            <img src="../public/weui_arrow-outlined.svg" alt="" />
+          </div>
         </div>
-      </div>
-      <div className="w-[217px] h-[54px] pt-[12px] pb-[12px] flex justify-center gap-[12px] flex-col items-center">
-        <img
-          className="w-6 h-6"
-          src="../public/hav/documentIcon.svg"
-          alt=""
-        />
-        <div className="flex items-center justify-center">
-          <span className="font-inter font-normal text-[14px] leading-[100%] tracking-[0] capitalize">
-            Quotes
-          </span>
-          <img src="../public/weui_arrow-outlined.svg" alt="" />
-        </div>
-      </div>
-      <div className="w-[217px] h-[54px] pt-[12px] pb-[12px] flex justify-center gap-[12px] flex-col items-center">
-        <img
-          className="w-6 h-6"
-          src="../public/hav/toolsIcon.svg"
-          alt=""
-        />
-        <div className="flex items-center justify-center">
-          <span className="font-inter font-normal text-[14px] leading-[100%] tracking-[0] capitalize">
-            Jobs
-          </span>
-          <img src="../public/weui_arrow-outlined.svg" alt="" />
-        </div>
-      </div>
-      <div className="w-[217px] h-[54px] pt-[12px] pb-[12px] flex justify-center gap-[12px] flex-col items-center">
-        <img
-          className="w-6 h-6"
-          src="../public/hav/planer.svg"
-          alt=""
-        />
-        <div className="flex items-center justify-center">
-          <span className="font-inter font-normal text-[14px] leading-[100%] tracking-[0] capitalize">
-            Planner
-          </span>
-          <img src="../public/weui_arrow-outlined.svg" alt="" />
-        </div>
-      </div>
-      <div className="w-[217px] h-[54px] pt-[12px] pb-[12px] flex justify-center gap-[12px] flex-col items-center">
-        <img className="w-6 h-6" src="../public/Vector.svg" alt="" />
-        <div className="flex items-center justify-center">
-          <span className="font-inter font-normal text-[14px] leading-[100%] tracking-[0] capitalize">
-            Chat
-          </span>
-          <img src="../public/weui_arrow-outlined.svg" alt="" />
-        </div>
-      </div>
-      <div className="w-[217px] h-[54px] pt-[12px] pb-[12px] flex justify-center gap-[12px] flex-col items-center">
-        <img
-          className="w-6 h-6"
-          src="../public/hav/Group.svg"
-          alt=""
-        />
-        <div className="flex items-center justify-center">
-          <span className="font-inter font-normal text-[14px] leading-[100%] tracking-[0] capitalize">
-            Finance
-          </span>
-          <img src="../public/weui_arrow-outlined.svg" alt="" />
-        </div>
-      </div>
-      <div className="w-[217px] h-[54px] pt-[12px] pb-[12px] flex justify-center gap-[12px] flex-col items-center">
-        <img
-          className="w-6 h-6"
-          src="../public/hav/contactIcon.svg"
-          alt=""
-        />
-        <div className="flex items-center justify-center">
-          <span className="font-inter font-normal text-[14px] leading-[100%] tracking-[0] capitalize">
-            Contacts
-          </span>
-          <img src="../public/weui_arrow-outlined.svg" alt="" />
-        </div>
-      </div>
-      <div className="w-[217px] h-[54px] pt-[12px] pb-[12px] flex justify-center gap-[12px] flex-col items-center">
-        <img
-          className="w-6 h-6"
-          src="../public/hav/moneyIcon.svg"
-          alt=""
-        />
-        <div className="flex items-center justify-center">
-          <span className="font-inter font-normal text-[14px] leading-[100%] tracking-[0] capitalize">
-            Expenses
-          </span>
-          <img src="../public/weui_arrow-outlined.svg" alt="" />
-        </div>
-      </div>
-      <div className="w-[217px] h-[54px] pt-[12px] pb-[12px] flex justify-center gap-[12px] flex-col items-center">
-        <img
-          className="w-6 h-6"
-          src="../public/hav/lucide_user-round.svg"
-          alt=""
-        />
-        <div className="flex items-center justify-center">
-          <span className="font-inter font-normal text-[14px] leading-[100%] tracking-[0] capitalize">
-            User
-          </span>
-          <img src="../public/weui_arrow-outlined.svg" alt="" />
-        </div>
-      </div>
+      ))}
     </div>
   );
 };

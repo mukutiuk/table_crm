@@ -1,26 +1,25 @@
-import React, {useState} from "react";
-import {type QuoteItem} from "../type/type";
+import React, { useState } from "react";
+import { type QuoteItem } from "../type/type";
 import EditQuoteModal from "./EditQuoteModal";
-import { useAppDispatch } from "../utils/hooks";
-import { changeCheckbox } from "../features/TableSlice";
+import { changeCheckbox, editQuote } from "../store/TableSlice";
+import { useAppDispatch } from "../store/store";
 
 type Props = {
   row: QuoteItem;
   index: number;
 };
 
-export const TableRow: React.FC<Props> = ({row, index}) => {
+export const TableRow: React.FC<Props> = ({ row: quote, index }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [quoteData, setQuoteData] = useState<QuoteItem>(row);
-    const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const handleSave = (updatedData: QuoteItem) => {
-    setQuoteData(updatedData);
+    dispatch(editQuote(updatedData));
   };
 
   const handleChangeCheckbox = (id: number | string) => {
-    dispatch(changeCheckbox(id))
-  }
+    dispatch(changeCheckbox(id));
+  };
 
   return (
     <>
@@ -29,31 +28,29 @@ export const TableRow: React.FC<Props> = ({row, index}) => {
           index % 2 === 0 ? "bg-white" : "bg-gray-100"
         }`}
       >
-        <td className="p-2 pl-[12px] text-center font-semibold text-lg leading-[100%] tracking-normal capitalize">
+        <td className="p-2 pl-3 text-center font-semibold text-lg leading-[100%] tracking-normal capitalize">
           <div className="flex items-center justify-center gap-2">
             <input
-              onChange={() => handleChangeCheckbox(row.id)}
+              onChange={() => handleChangeCheckbox(quote.id)}
               type="checkbox"
             />
-            {index + 1}.
+            {index + 1}
           </div>
         </td>
 
-        <td className="p-2 w-[150px] text-sm">{quoteData.quote}</td>
-        <td className="p-2 w-[150px] text-sm">{quoteData.date}</td>
-        <td className="p-2 w-[150px] text-sm">{quoteData.customer}</td>
-        <td className="p-2 w-[150px] text-sm">{quoteData.site}</td>
-        <td className="p-2 w-[150px] text-sm">{quoteData.noQuotes}</td>
-        <td className="p-2 w-[150px] text-sm">{quoteData.subTotal}</td>
-        <td className="p-2 w-[150px] text-sm">{quoteData.vat}</td>
-        <td className="p-2 w-[150px] text-sm">{quoteData.total}</td>
-        <td className="p-2 w-[150px] text-sm">{quoteData.deposit}</td>
-        <td className="p-2 w-[150px] text-sm">{quoteData.outstanding}</td>
-        <td className="p-2 text-sm">{quoteData.profit}</td>
-        <td className="p-2 text-sm">{quoteData.email}</td>
-        <td className="p-2 w-[148px] text-start text-sm">
-          {quoteData.description}
-        </td>
+        <td className="p-2  text-sm min-w-[110px]">{quote.quote}</td>
+        <td className="p-2  text-sm ">{quote.date}</td>
+        <td className="p-2  text-sm">{quote.customer}</td>
+        <td className="p-2  text-sm">{quote.site}</td>
+        <td className="p-2  text-sm">{quote.noQuotes}</td>
+        <td className="p-2  text-sm">{quote.subTotal}</td>
+        <td className="p-2  text-sm">{quote.outstanding}</td>
+        <td className="p-2  text-sm">{quote.vat}</td>
+        <td className="p-2  text-sm">{quote.total}</td>
+        <td className="p-2  text-sm">{quote.deposit}</td>
+        <td className="p-2 text-sm">{quote.profit}</td>
+        <td className="p-2 text-sm">{quote.email}</td>
+        <td className="p-2 min-w-[158px] text-sm">{quote.description}</td>
 
         <td className="p-2 w-[150px]">
           <div className="flex justify-end items-center">
@@ -68,17 +65,17 @@ export const TableRow: React.FC<Props> = ({row, index}) => {
               />
             </button>
           </div>
+          <div>
+            {isModalOpen && (
+              <EditQuoteModal
+                setIsModalOpen={setIsModalOpen}
+                data={quote}
+                onSave={handleSave}
+              />
+            )}
+          </div>
         </td>
       </tr>
-      <div>
-        {isModalOpen && (
-          <EditQuoteModal
-            setIsModalOpen={setIsModalOpen}
-            data={quoteData}
-            onSave={handleSave}
-          />
-        )}
-      </div>
     </>
   );
 };

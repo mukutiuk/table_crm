@@ -1,5 +1,5 @@
-import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
-import type {QuoteItem} from "../type/type";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import type { QuoteItem } from "../type/type";
 
 export interface TableDataState {
   data: QuoteItem[];
@@ -8,6 +8,7 @@ export interface TableDataState {
   dataInput: string;
   filteredData: QuoteItem[];
   switchModal: boolean;
+  itemsPerPage: number;
 }
 
 const initialState: TableDataState = {
@@ -17,6 +18,7 @@ const initialState: TableDataState = {
   dataInput: "",
   filteredData: [],
   switchModal: false,
+  itemsPerPage: 25,
 };
 
 export const fetchTableData = createAsyncThunk(
@@ -53,26 +55,43 @@ export const TableDataSlice = createSlice({
       );
     },
     changeCheckbox: (state, action) => {
-        return {
-            ...state,
-            filteredData: state.filteredData.map(item => {
-                if (item.id === action.payload) {
-                    return { ...item, checkbox: !item.checkbox };
-                }
+      return {
+        ...state,
+        filteredData: state.filteredData.map((item) => {
+          if (item.id === action.payload) {
+            return { ...item, checkbox: !item.checkbox };
+          }
 
-                return item;
-            })
-        }
+          return item;
+        }),
+      };
+    },
+    changePerPage: (state, action) => {
+      return {
+        ...state,
+        itemsPerPage: action.payload,
+      };
     },
     deleteCheckbox: (state) => {
-        return {
-            ...state,
-            filteredData: state.filteredData.filter(item => !item.checkbox),
-        }
+      return {
+        ...state,
+        filteredData: state.filteredData.filter((item) => !item.checkbox),
+      };
     },
     addQuote: (state, action) => {
       state.filteredData.push(action.payload);
-      state.data.push(action.payload); // якщо треба додати і в загальні дані
+      state.data.push(action.payload);
+    },
+    editQuote: (state, action) => {
+      return {
+        ...state,
+        filteredData: state.filteredData.map((item) => {
+          if (action.payload.id === item.id) {
+            return action.payload;
+          }
+          return item;
+        }),
+      };
     },
     handleSwitchModal: (state) => {
       return {
@@ -90,4 +109,12 @@ export const TableDataSlice = createSlice({
 });
 
 export default TableDataSlice.reducer;
-export const {searchData, handleSwitchModal, addQuote, changeCheckbox, deleteCheckbox} = TableDataSlice.actions;
+export const {
+  searchData,
+  handleSwitchModal,
+  addQuote,
+  changeCheckbox,
+  deleteCheckbox,
+  editQuote,
+  changePerPage,
+} = TableDataSlice.actions;
