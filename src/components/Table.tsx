@@ -3,7 +3,25 @@ import { TableRow } from "./TableRow";
 import { fetchTableData } from "../store/TableSlice";
 import { useAppDispatch } from "../store/store";
 import { PaginationWithPageSizeSelector } from "./Pagination";
-import usePagination from "../utils/usePagination";
+import usePagination from "../hooks/usePagination";
+
+const TABLE_HEADER = [
+  "№",
+  "Quote",
+  "Date",
+  "Customer",
+  "Site/Delivery",
+  "No. Quotes",
+  "Sub Total",
+  "VAT",
+  "Total",
+  "Deposit",
+  "Outstanding",
+  "Profit",
+  "Email",
+  "Description",
+  "Customer Job Ref",
+];
 
 export const Table = () => {
   const dispatch = useAppDispatch();
@@ -25,23 +43,7 @@ export const Table = () => {
             <table className="min-w-full text-sm text-left table-fixed">
               <thead>
                 <tr className="bg-gray-200 border-b">
-                  {[
-                    "№",
-                    "Quote",
-                    "Date",
-                    "Customer",
-                    "Site/Delivery",
-                    "No. Quotes",
-                    "Sub Total",
-                    "VAT",
-                    "Total",
-                    "Deposit",
-                    "Outstanding",
-                    "Profit",
-                    "Email",
-                    "Description",
-                    "Customer Job Ref",
-                  ].map((heading, i) => (
+                  {TABLE_HEADER.map((heading, i) => (
                     <th
                       key={i}
                       className={`p-2 font-inter font-medium text-base leading-[100%] tracking-normal capitalize ${
